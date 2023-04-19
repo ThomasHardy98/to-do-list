@@ -1,5 +1,7 @@
-import TasksContext from "context/TasksContext";
 import { FormEvent, useContext, useState } from "react";
+
+import TasksContext from "context/TasksContext";
+import newid from "utils/newid";
 
 const TaskForm = () => {
   const ctx = useContext(TasksContext);
@@ -11,7 +13,11 @@ const TaskForm = () => {
     const formElements = form.elements as typeof form.elements & {
       task: HTMLInputElement;
     };
-    ctx.addTask(formElements.task.value);
+    ctx.addTask({
+      id: newid(),
+      title: formElements.task.value,
+      completed: false,
+    });
     setInput("");
   };
 

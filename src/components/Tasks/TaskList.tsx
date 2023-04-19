@@ -1,7 +1,7 @@
 import Task from "./Task";
 
 type ITasks = {
-  tasks: Array<string>;
+  tasks: Array<ITask>;
 };
 
 const TaskList = ({ tasks }: ITasks) => {
@@ -10,7 +10,7 @@ const TaskList = ({ tasks }: ITasks) => {
       {tasks.map((task, i) => {
         return (
           <li key={i}>
-            <Task title={task} />
+            <Task id={task.id} title={task.title} completed={task.completed} />
           </li>
         );
       })}
