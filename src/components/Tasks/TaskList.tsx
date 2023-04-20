@@ -12,7 +12,12 @@ const TaskList = ({ tasks }: ITasks) => {
       {tasks.map((task, i) => {
         return (
           <li key={i} className={styles.listItem}>
-            <Task id={task.id} title={task.title} />
+            <Task
+              id={task.id}
+              title={task.title}
+              completed={false}
+              isEditing={false}
+            />
           </li>
         );
       })}

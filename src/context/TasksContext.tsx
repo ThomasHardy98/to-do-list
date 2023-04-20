@@ -6,6 +6,8 @@ type ITasksContext = {
   deleteTask: (id: string) => void;
   changeStatus: (id: string, completed: boolean) => void;
   updateText: (id: string, title: string) => void;
+  isEditing: (id: string, isEditing: boolean) => void;
+  getIsEditing: (id: string) => boolean;
 };
 
 const defaultState = {
@@ -14,6 +16,8 @@ const defaultState = {
   deleteTask: () => {},
   changeStatus: () => {},
   updateText: () => {},
+  isEditing: () => {},
+  getIsEditing: () => false,
 };
 
 const TasksContext = createContext<ITasksContext>(defaultState);

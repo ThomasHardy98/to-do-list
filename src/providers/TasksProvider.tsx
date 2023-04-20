@@ -48,9 +48,31 @@ const TasksProvider = ({ children }: ITasksProvider) => {
     localStorage.setItem("thardy_tasks", JSON.stringify(updatedTasks));
   };
 
+  const isEditing = (id: string, isEditing: boolean) => {
+    const selectedTaskIndex = tasks.findIndex((task) => task.id === id);
+    const updatedTasks = [...tasks];
+    updatedTasks[selectedTaskIndex].isEditing = isEditing;
+    setTasks(updatedTasks);
+    localStorage.setItem("thardy_tasks", JSON.stringify(updatedTasks));
+  };
+
+  const getIsEditing = (id: string): boolean => {
+    const selectedTaskIndex = tasks.findIndex((task) => task.id === id);
+    const result = tasks[selectedTaskIndex].isEditing;
+    return result;
+  };
+
   return (
     <TasksContext.Provider
-      value={{ tasks, addTask, deleteTask, changeStatus, updateText }}
+      value={{
+        tasks,
+        addTask,
+        deleteTask,
+        changeStatus,
+        updateText,
+        isEditing,
+        getIsEditing,
+      }}
     >
       {children}
     </TasksContext.Provider>

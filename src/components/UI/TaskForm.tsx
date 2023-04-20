@@ -1,7 +1,7 @@
 import { FormEvent, useContext, useRef, useState } from "react";
+import { v4 } from "uuid";
 
 import TasksContext from "context/TasksContext";
-import newid from "utils/newid";
 
 import styles from "./TaskForm.module.scss";
 
@@ -14,16 +14,19 @@ const TaskForm = () => {
     e.preventDefault();
     if (taskRef.current) {
       ctx.addTask({
-        id: newid(),
+        id: v4(),
         title: taskRef.current.value,
         completed: false,
+        isEditing: false,
       });
       setInput("");
     }
   };
 
-  const onInput = (e: FormEvent<HTMLInputElement>) => {
-    setInput(e.currentTarget.value);
+  const onInput = () => {
+    if (taskRef.current) {
+      setInput(taskRef.current.value);
+    }
   };
 
   return (

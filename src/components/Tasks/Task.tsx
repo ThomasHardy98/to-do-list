@@ -1,4 +1,4 @@
-import { ChangeEvent, MouseEvent, useContext, useRef, useState } from "react";
+import { ChangeEvent, MouseEvent, useContext, useRef } from "react";
 
 import TasksContext from "context/TasksContext";
 
@@ -6,7 +6,6 @@ import styles from "./Task.module.scss";
 
 const Task = ({ id, title }: ITask) => {
   const ctx = useContext(TasksContext);
-  const [isEditing, setIsEditing] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -20,7 +19,7 @@ const Task = ({ id, title }: ITask) => {
 
   const handleEditClick = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    setIsEditing(true);
+    ctx.isEditing(id, true);
   };
 
   const handleUpdateClick = (e: MouseEvent<HTMLButtonElement>) => {
@@ -28,28 +27,31 @@ const Task = ({ id, title }: ITask) => {
     if (inputRef.current) {
       ctx.updateText(id, inputRef.current.value);
     }
-    setIsEditing(false);
+    ctx.isEditing(id, false);
   };
 
   return (
     <div className={styles.taskContainer}>
       <input type="checkbox" onChange={handleChange} />
-      {!isEditing ? (
+      {!ctx.getIsEditing(id) ? (
         <p>{title}</p>
       ) : (
         <input
           className={styles.editingInput}
+          key={title}
           defaultValue={title}
           ref={inputRef}
         />
       )}
       <div className={styles.actionButtons}>
-        {!isEditing ? (
+        {!ctx.getIsEditing(id) ? (
           <button onClick={handleEditClick}>Edit</button>
         ) : (
           <button onClick={handleUpdateClick}>Update</button>
         )}
-        {!isEditing && <button onClick={handleDeleteClick}>Delete</button>}
+        {!ctx.getIsEditing(id) && (
+          <button onClick={handleDeleteClick}>Delete</button>
+        )}
       </div>
     </div>
   );
