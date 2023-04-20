@@ -1,18 +1,19 @@
-import styles from "App.module.scss";
-import { Fragment, useContext } from "react";
+import { useContext } from "react";
 
 import TaskList from "components/Tasks/TaskList";
 import TaskForm from "components/UI/TaskForm";
 import TasksContext from "context/TasksContext";
 
+import styles from "App.module.scss";
+
 const App = () => {
   const ctx = useContext(TasksContext);
   return (
-    <Fragment>
-      <div className={styles.h3}>To-do List</div>
+    <div className={styles.container}>
+      <div className={styles.title}>To-do List</div>
       <TaskForm />
       <TaskList tasks={ctx.tasks} />
-    </Fragment>
+    </div>
   );
 };
 

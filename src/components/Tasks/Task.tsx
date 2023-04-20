@@ -2,6 +2,8 @@ import { ChangeEvent, MouseEvent, useContext, useRef, useState } from "react";
 
 import TasksContext from "context/TasksContext";
 
+import styles from "./Task.module.scss";
+
 const Task = ({ id, title }: ITask) => {
   const ctx = useContext(TasksContext);
   const [isEditing, setIsEditing] = useState(false);
@@ -30,19 +32,25 @@ const Task = ({ id, title }: ITask) => {
   };
 
   return (
-    <div>
+    <div className={styles.taskContainer}>
       <input type="checkbox" onChange={handleChange} />
       {!isEditing ? (
         <p>{title}</p>
       ) : (
-        <input defaultValue={title} ref={inputRef} />
+        <input
+          className={styles.editingInput}
+          defaultValue={title}
+          ref={inputRef}
+        />
       )}
-      {!isEditing ? (
-        <button onClick={handleEditClick}>Edit</button>
-      ) : (
-        <button onClick={handleUpdateClick}>Update</button>
-      )}
-      <button onClick={handleDeleteClick}>Delete</button>
+      <div className={styles.actionButtons}>
+        {!isEditing ? (
+          <button onClick={handleEditClick}>Edit</button>
+        ) : (
+          <button onClick={handleUpdateClick}>Update</button>
+        )}
+        {!isEditing && <button onClick={handleDeleteClick}>Delete</button>}
+      </div>
     </div>
   );
 };

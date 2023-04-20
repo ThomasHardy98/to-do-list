@@ -1,0 +1,18 @@
+.taskContainer {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.taskContainer p {
+  flex: 1;
+  text-align: left;
+}
+
+.editingInput {
+  flex: 1;
+}
+
+.actionButtons button {
+  margin-left: 6px;
+}

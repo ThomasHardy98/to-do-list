@@ -1,24 +1,25 @@
-import { FormEvent, useContext, useState } from "react";
+import { FormEvent, useContext, useRef, useState } from "react";
 
 import TasksContext from "context/TasksContext";
 import newid from "utils/newid";
 
+import styles from "./TaskForm.module.scss";
+
 const TaskForm = () => {
   const ctx = useContext(TasksContext);
   const [input, setInput] = useState("");
+  const taskRef = useRef<HTMLInputElement>(null);
 
   const addTask = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const form = e.currentTarget;
-    const formElements = form.elements as typeof form.elements & {
-      task: HTMLInputElement;
-    };
-    ctx.addTask({
-      id: newid(),
-      title: formElements.task.value,
-      completed: false,
-    });
-    setInput("");
+    if (taskRef.current) {
+      ctx.addTask({
+        id: newid(),
+        title: taskRef.current.value,
+        completed: false,
+      });
+      setInput("");
+    }
   };
 
   const onInput = (e: FormEvent<HTMLInputElement>) => {
@@ -26,9 +27,16 @@ const TaskForm = () => {
   };
 
   return (
-    <form onSubmit={addTask}>
-      <label>Add a task</label>
-      <input type="text" name="task" value={input} onChange={onInput} />
+    <form className={styles.form} onSubmit={addTask}>
+      <input
+        className={styles.input}
+        type="text"
+        name="task"
+        value={input}
+        onChange={onInput}
+        placeholder="Task name"
+        ref={taskRef}
+      />
       <button>Add task</button>
     </form>
   );
