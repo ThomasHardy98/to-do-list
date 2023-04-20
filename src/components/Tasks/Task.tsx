@@ -15,6 +15,7 @@ import styles from "./Task.module.scss";
 const Task = ({ id, title }: ITask) => {
   const ctx = useContext(TasksContext);
   const [input, setInput] = useState("");
+  const [error, setError] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -24,6 +25,11 @@ const Task = ({ id, title }: ITask) => {
   const handleInput = () => {
     if (inputRef.current) {
       setInput(inputRef.current.value);
+      if (inputRef.current.value !== "") {
+        setError(false);
+      } else {
+        setError(true);
+      }
     }
   };
 
@@ -39,10 +45,12 @@ const Task = ({ id, title }: ITask) => {
 
   const handleUpdateClick = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (inputRef.current) {
-      ctx.updateText(id, inputRef.current.value);
+    if (!error) {
+      if (inputRef.current) {
+        ctx.updateText(id, inputRef.current.value);
+      }
+      ctx.isEditing(id, false);
     }
-    ctx.isEditing(id, false);
   };
 
   return (
@@ -68,7 +76,7 @@ const Task = ({ id, title }: ITask) => {
             className={styles.editingForm}
           >
             <input
-              className={styles.editingInput}
+              className={`${styles.editingInput} ${error && styles.error}`}
               key={title}
               defaultValue={title}
               ref={inputRef}

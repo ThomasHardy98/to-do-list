@@ -8,37 +8,48 @@ import styles from "./TaskForm.module.scss";
 const TaskForm = () => {
   const ctx = useContext(TasksContext);
   const [input, setInput] = useState("");
-  const taskRef = useRef<HTMLInputElement>(null);
+  const [error, setError] = useState(false);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const addTask = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (taskRef.current) {
-      ctx.addTask({
-        id: v4(),
-        title: taskRef.current.value,
-        completed: false,
-        isEditing: false,
-      });
-      setInput("");
+    if (inputRef.current) {
+      if (!error && inputRef.current.value !== "") {
+        ctx.addTask({
+          id: v4(),
+          title: inputRef.current.value,
+          completed: false,
+          isEditing: false,
+        });
+        setInput("");
+        setError(false);
+      } else {
+        setError(true);
+      }
     }
   };
 
-  const onInput = () => {
-    if (taskRef.current) {
-      setInput(taskRef.current.value);
+  const handleInput = () => {
+    if (inputRef.current) {
+      setInput(inputRef.current.value);
+      if (inputRef.current.value !== "") {
+        setError(false);
+      } else {
+        setError(true);
+      }
     }
   };
 
   return (
     <form className={styles.form} onSubmit={addTask}>
       <input
-        className={styles.input}
+        className={`${styles.input} ${error && styles.error}`}
         type="text"
         name="task"
         value={input}
-        onChange={onInput}
+        onChange={handleInput}
         placeholder="Task name"
-        ref={taskRef}
+        ref={inputRef}
       />
       <button>Add task</button>
     </form>
