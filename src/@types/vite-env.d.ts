@@ -3,5 +3,5 @@
 type ITask = {
   id: string;
   title: string;
-  completed: boolean;
+  completed?: boolean;
 };

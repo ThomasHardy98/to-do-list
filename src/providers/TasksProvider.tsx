@@ -25,8 +25,17 @@ const TasksProvider = ({ children }: ITasksProvider) => {
     setTasks(updatedTasks);
   };
 
+  const updateText = (id: string, title: string) => {
+    const selectedTaskIndex = tasks.findIndex((task) => task.id === id);
+    const updatedTasks = [...tasks];
+    updatedTasks[selectedTaskIndex].title = title;
+    setTasks(updatedTasks);
+  };
+
   return (
-    <TasksContext.Provider value={{ tasks, addTask, deleteTask, changeStatus }}>
+    <TasksContext.Provider
+      value={{ tasks, addTask, deleteTask, changeStatus, updateText }}
+    >
       {children}
     </TasksContext.Provider>
   );

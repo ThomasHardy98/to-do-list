@@ -27,9 +27,9 @@ const TaskForm = () => {
 
   return (
     <form onSubmit={addTask}>
-      <label>Add a to-do</label>
+      <label>Add a task</label>
       <input type="text" name="task" value={input} onChange={onInput} />
-      <button>Add to-do</button>
+      <button>Add task</button>
     </form>
   );
 };

@@ -10,7 +10,7 @@ const TaskList = ({ tasks }: ITasks) => {
       {tasks.map((task, i) => {
         return (
           <li key={i}>
-            <Task id={task.id} title={task.title} completed={task.completed} />
+            <Task id={task.id} title={task.title} />
           </li>
         );
       })}
