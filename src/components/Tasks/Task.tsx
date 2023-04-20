@@ -14,7 +14,6 @@ import styles from "./Task.module.scss";
 
 const Task = ({ id, title }: ITask) => {
   const ctx = useContext(TasksContext);
-  const [input, setInput] = useState("");
   const [error, setError] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -24,7 +23,6 @@ const Task = ({ id, title }: ITask) => {
 
   const handleInput = () => {
     if (inputRef.current) {
-      setInput(inputRef.current.value);
       if (inputRef.current.value !== "") {
         setError(false);
       } else {
@@ -59,13 +57,18 @@ const Task = ({ id, title }: ITask) => {
         type="checkbox"
         onChange={handleChange}
         checked={ctx.getStatus(id)}
+        className={styles.checkbox}
       />
       {!ctx.getIsEditing(id) ? (
         <Fragment>
-          <p>{title}</p>
+          <p className={`${ctx.getStatus(id) && styles.completed}`}>{title}</p>
           <div className={styles.actionButtons}>
-            <button onClick={handleEditClick}>Edit</button>
-            <button onClick={handleDeleteClick}>Delete</button>
+            <button onClick={handleEditClick} className={styles.editButton}>
+              Edit
+            </button>
+            <button onClick={handleDeleteClick} className={styles.deleteButton}>
+              Delete
+            </button>
           </div>
         </Fragment>
       ) : (
@@ -85,7 +88,7 @@ const Task = ({ id, title }: ITask) => {
             />
           </form>
           <div className={styles.actionButtons}>
-            <button type="submit" form="edit">
+            <button type="submit" form="edit" className={styles.updateButton}>
               Update
             </button>
           </div>

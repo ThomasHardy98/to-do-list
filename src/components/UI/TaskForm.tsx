@@ -51,7 +51,7 @@ const TaskForm = () => {
         placeholder="Task name"
         ref={inputRef}
       />
-      <button>Add task</button>
+      <button className={styles.addButton}>Add task</button>
     </form>
   );
 };

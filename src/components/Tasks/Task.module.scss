@@ -1,24 +1,71 @@
+@import "../../styles/fonts.scss";
+
 .taskContainer {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   gap: 10px;
+  height: 100%;
 }
 
 .taskContainer p {
   flex: 1;
+  font-family: $secondary_font;
   text-align: left;
+  font-size: 1rem;
 }
 
 .editingForm {
   display: flex;
   width: 100%;
+  height: 100%;
 }
 
 .editingInput {
   flex: 1;
+  padding: 4px;
+  font-size: 1rem;
+  border-width: 1px;
+  border-style: solid;
+  border-color: black;
+  border-radius: 4px;
+  outline: transparent;
+  width: 100%;
+  font-family: $secondary_font;
+}
+
+.checkbox {
+  cursor: pointer;
+  accent-color: black;
+}
+
+.completed {
+  text-decoration: line-through;
+}
+
+.actionButtons {
+  display: flex;
+  height: 100%;
 }
 
 .actionButtons button {
+  padding: 2px;
+  cursor: pointer;
+  background-color: white;
+  min-width: 50px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: black;
+  border-radius: 4px;
+  outline: transparent;
+  font-family: $secondary_font;
+}
+
+.actionButtons button:hover {
+  background-color: rgb(226, 226, 226);
+}
+
+.deleteButton {
   margin-left: 6px;
 }
 
