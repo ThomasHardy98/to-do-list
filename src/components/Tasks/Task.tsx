@@ -1,4 +1,12 @@
-import { ChangeEvent, MouseEvent, useContext, useRef } from "react";
+import {
+  ChangeEvent,
+  Fragment,
+  FormEvent,
+  MouseEvent,
+  useContext,
+  useRef,
+  useState,
+} from "react";
 
 import TasksContext from "context/TasksContext";
 
@@ -6,10 +14,17 @@ import styles from "./Task.module.scss";
 
 const Task = ({ id, title }: ITask) => {
   const ctx = useContext(TasksContext);
+  const [input, setInput] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     ctx.changeStatus(id, e.target.checked);
+  };
+
+  const handleInput = () => {
+    if (inputRef.current) {
+      setInput(inputRef.current.value);
+    }
   };
 
   const handleDeleteClick = (e: MouseEvent<HTMLButtonElement>) => {
@@ -22,7 +37,7 @@ const Task = ({ id, title }: ITask) => {
     ctx.isEditing(id, true);
   };
 
-  const handleUpdateClick = (e: MouseEvent<HTMLButtonElement>) => {
+  const handleUpdateClick = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (inputRef.current) {
       ctx.updateText(id, inputRef.current.value);
@@ -32,27 +47,42 @@ const Task = ({ id, title }: ITask) => {
 
   return (
     <div className={styles.taskContainer}>
-      <input type="checkbox" onChange={handleChange} />
+      <input
+        type="checkbox"
+        onChange={handleChange}
+        checked={ctx.getStatus(id)}
+      />
       {!ctx.getIsEditing(id) ? (
-        <p>{title}</p>
+        <Fragment>
+          <p>{title}</p>
+          <div className={styles.actionButtons}>
+            <button onClick={handleEditClick}>Edit</button>
+            <button onClick={handleDeleteClick}>Delete</button>
+          </div>
+        </Fragment>
       ) : (
-        <input
-          className={styles.editingInput}
-          key={title}
-          defaultValue={title}
-          ref={inputRef}
-        />
+        <Fragment>
+          <form
+            onSubmit={handleUpdateClick}
+            id="edit"
+            className={styles.editingForm}
+          >
+            <input
+              className={styles.editingInput}
+              key={title}
+              defaultValue={title}
+              ref={inputRef}
+              onChange={handleInput}
+              autoFocus
+            />
+          </form>
+          <div className={styles.actionButtons}>
+            <button type="submit" form="edit">
+              Update
+            </button>
+          </div>
+        </Fragment>
       )}
-      <div className={styles.actionButtons}>
-        {!ctx.getIsEditing(id) ? (
-          <button onClick={handleEditClick}>Edit</button>
-        ) : (
-          <button onClick={handleUpdateClick}>Update</button>
-        )}
-        {!ctx.getIsEditing(id) && (
-          <button onClick={handleDeleteClick}>Delete</button>
-        )}
-      </div>
     </div>
   );
 };

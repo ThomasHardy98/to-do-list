@@ -40,6 +40,12 @@ const TasksProvider = ({ children }: ITasksProvider) => {
     localStorage.setItem("thardy_tasks", JSON.stringify(updatedTasks));
   };
 
+  const getStatus = (id: string): boolean => {
+    const selectedTaskIndex = tasks.findIndex((task) => task.id === id);
+    const result = tasks[selectedTaskIndex].completed;
+    return result;
+  };
+
   const updateText = (id: string, title: string) => {
     const selectedTaskIndex = tasks.findIndex((task) => task.id === id);
     const updatedTasks = [...tasks];
@@ -69,6 +75,7 @@ const TasksProvider = ({ children }: ITasksProvider) => {
         addTask,
         deleteTask,
         changeStatus,
+        getStatus,
         updateText,
         isEditing,
         getIsEditing,
