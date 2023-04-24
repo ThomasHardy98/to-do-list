@@ -1,14 +1,19 @@
 @import "../../styles/spacing.scss";
 @import "../../styles/fonts.scss";
+@import "../../styles/colors.scss";
 
 .form {
+  max-width: 400px;
+  width: 100%;
   height: 40px;
   margin: $padding;
   display: flex;
   align-items: center;
   flex-direction: row;
-  border: 1px solid black;
+  border: unset;
   border-radius: 6px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 }
 
 .input {
@@ -16,31 +21,38 @@
   padding: 12px 20px;
   border-radius: 6px 0 0 6px;
   font-size: 1rem;
-  border-width: 1px;
   text-align: center;
   outline: transparent;
   border: none;
   width: 100%;
   font-family: $secondary_font;
+  color: $primary_color;
+  background-color: $secondary_color;
 }
 
 .addButton {
+  color: $primary_color;
   height: 100%;
   padding: 6px;
   border-radius: 0 6px 6px 0;
   font-size: 1rem;
   text-align: center;
   outline: transparent;
-  width: 20%;
+  width: 14%;
   font-family: $secondary_font;
   cursor: pointer;
   border: none;
+  background-color: $secondary_color;
+}
+
+.addButton svg {
+  height: 1rem;
 }
 
 .addButton:hover {
-  background-color: rgb(226, 226, 226);
+  color: $accent-color;
 }
 
 .error {
-  border: 1px solid red;
+  border: 1px solid $error_color;
 }

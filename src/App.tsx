@@ -15,7 +15,7 @@ const App = () => {
       {ctx.tasks.length > 0 ? (
         <TaskList tasks={ctx.tasks} />
       ) : (
-        <p>You have no tasks.</p>
+        <p className={styles.noTasksText}>You have no tasks.</p>
       )}
     </div>
   );

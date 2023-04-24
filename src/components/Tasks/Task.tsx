@@ -55,12 +55,15 @@ const Task = ({ id, title }: ITask) => {
 
   return (
     <div className={styles.taskContainer}>
-      <input
-        type="checkbox"
-        onChange={handleChange}
-        checked={ctx.getStatus(id)}
-        className={styles.checkbox}
-      />
+      <label className={styles.container}>
+        <input
+          type="checkbox"
+          onChange={handleChange}
+          checked={ctx.getStatus(id)}
+          className={styles.checkbox}
+        />
+        <span className={styles.checkmark}></span>
+      </label>
       {!ctx.getIsEditing(id) ? (
         <Fragment>
           <p className={`${ctx.getStatus(id) && styles.completed}`}>{title}</p>

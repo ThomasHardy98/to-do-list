@@ -1,5 +1,6 @@
 @import "./styles/fonts.scss";
 @import "./styles/spacing.scss";
+@import "./styles/colors.scss";
 
 * {
   margin: 0;
@@ -11,6 +12,7 @@ html,
 body {
   margin: 0;
   height: 100%;
+  background-color: #17181f;
 }
 
 .container {
@@ -22,6 +24,13 @@ body {
 
 .title {
   font-family: $primary_font;
+  color: $primary_color;
   font-size: 3rem;
   font-weight: 700;
+}
+
+.noTasksText {
+  font-family: $secondary_font;
+  color: $primary_color;
+  font-size: 1rem;
 }
