@@ -12,7 +12,11 @@ const App = () => {
     <div className={styles.container}>
       <div className={styles.title}>To-do List</div>
       <TaskForm />
-      <TaskList tasks={ctx.tasks} />
+      {ctx.tasks.length > 0 ? (
+        <TaskList tasks={ctx.tasks} />
+      ) : (
+        <p>You have no tasks.</p>
+      )}
     </div>
   );
 };

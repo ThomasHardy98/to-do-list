@@ -53,7 +53,7 @@ const TaskForm = () => {
         name="task"
         value={input}
         onChange={handleInput}
-        placeholder="Task name"
+        placeholder="Task"
         ref={inputRef}
       />
       <button className={styles.addButton}>
