@@ -2,38 +2,39 @@
 @import "../../styles/fonts.scss";
 
 .form {
-  padding: $padding;
+  height: 40px;
+  margin: $padding;
   display: flex;
   align-items: center;
-  flex-direction: column;
+  flex-direction: row;
+  border: 1px solid black;
+  border-radius: 6px;
 }
 
 .input {
+  height: 100%;
   padding: 12px 20px;
-  font-size: 1.2rem;
+  border-radius: 6px 0 0 6px;
+  font-size: 1rem;
   border-width: 1px;
-  border-style: solid;
-  border-color: black;
-  border-radius: 6px;
   text-align: center;
   outline: transparent;
+  border: none;
   width: 100%;
   font-family: $secondary_font;
 }
 
 .addButton {
-  margin-top: 10px;
+  height: 100%;
   padding: 6px;
+  border-radius: 0 6px 6px 0;
   font-size: 1rem;
-  border-width: 1px;
-  border-style: solid;
-  border-color: black;
-  border-radius: 6px;
   text-align: center;
   outline: transparent;
-  width: 100%;
+  width: 20%;
   font-family: $secondary_font;
   cursor: pointer;
+  border: none;
 }
 
 .addButton:hover {

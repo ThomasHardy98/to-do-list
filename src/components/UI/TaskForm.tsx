@@ -1,5 +1,7 @@
 import { FormEvent, useContext, useRef, useState } from "react";
 import { v4 } from "uuid";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
 import TasksContext from "context/TasksContext";
 
@@ -41,9 +43,12 @@ const TaskForm = () => {
   };
 
   return (
-    <form className={styles.form} onSubmit={addTask}>
+    <form
+      className={`${styles.form} ${error && styles.error}`}
+      onSubmit={addTask}
+    >
       <input
-        className={`${styles.input} ${error && styles.error}`}
+        className={styles.input}
         type="text"
         name="task"
         value={input}
@@ -51,7 +56,9 @@ const TaskForm = () => {
         placeholder="Task name"
         ref={inputRef}
       />
-      <button className={styles.addButton}>Add task</button>
+      <button className={styles.addButton}>
+        <FontAwesomeIcon icon={faPlus} />
+      </button>
     </form>
   );
 };

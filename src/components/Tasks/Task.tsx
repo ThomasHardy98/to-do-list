@@ -7,6 +7,8 @@ import {
   useRef,
   useState,
 } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrashCan, faPen, faCheck } from "@fortawesome/free-solid-svg-icons";
 
 import TasksContext from "context/TasksContext";
 
@@ -64,10 +66,10 @@ const Task = ({ id, title }: ITask) => {
           <p className={`${ctx.getStatus(id) && styles.completed}`}>{title}</p>
           <div className={styles.actionButtons}>
             <button onClick={handleEditClick} className={styles.editButton}>
-              Edit
+              <FontAwesomeIcon icon={faPen} />
             </button>
             <button onClick={handleDeleteClick} className={styles.deleteButton}>
-              Delete
+              <FontAwesomeIcon icon={faTrashCan} />
             </button>
           </div>
         </Fragment>
@@ -89,7 +91,7 @@ const Task = ({ id, title }: ITask) => {
           </form>
           <div className={styles.actionButtons}>
             <button type="submit" form="edit" className={styles.updateButton}>
-              Update
+              <FontAwesomeIcon icon={faCheck} />
             </button>
           </div>
         </Fragment>
