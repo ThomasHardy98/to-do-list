@@ -23,5 +23,5 @@ To get the project setup and running locally.
 
 If you'd prefer to view the project without installing and running it yourself, you can find the live site here
 
-[<img src="https://w7.pngwing.com/pngs/286/384/png-transparent-live-streaming-youtube-button-online-internet-social-media-media-icon.png" width="80"/>](https://thomashardytodolist.com/)
+[<img src="https://img.shields.io/badge/Live-View%20live%20site-red" width="160"/>](https://thomashardytodolist.com/)
 
